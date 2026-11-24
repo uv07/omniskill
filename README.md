@@ -1,5 +1,7 @@
 # omniskill
 
+[![validate](https://github.com/uv07/omniskill/actions/workflows/validate.yml/badge.svg)](https://github.com/uv07/omniskill/actions/workflows/validate.yml)
+
 One agent skill that combines **415 skills from six open-source collections** into a single installable skill for **Claude Code** and **Google Antigravity**.
 
 | Source | Skills |
@@ -29,24 +31,60 @@ Only the layer a task needs gets loaded:
 
 ## Install
 
-**Claude Code**
+**One line** (installs for every host it finds: `~/.claude` and/or `~/.gemini`)
 ```bash
-git clone https://github.com/<you>/omniskill ~/.claude/skills/omniskill
+curl -fsSL https://raw.githubusercontent.com/uv07/omniskill/main/install.sh | bash
 ```
 
-**Google Antigravity** (global)
+**Pick a target**
 ```bash
-git clone https://github.com/<you>/omniskill ~/.gemini/config/skills/omniskill
-# older versions: ~/.gemini/antigravity/skills/omniskill
+git clone https://github.com/uv07/omniskill && cd omniskill
+./install.sh --claude                 # ~/.claude/skills/omniskill
+./install.sh --antigravity            # ~/.gemini/config/skills/omniskill
+./install.sh --project ~/code/myapp   # myapp/.claude/skills and myapp/.agents/skills
+./install.sh --update                 # git pull every install
+./install.sh --uninstall              # remove (only touches omniskill installs)
 ```
 
-**Per project** (either host)
+**Manual**
 ```bash
-git clone https://github.com/<you>/omniskill .agents/skills/omniskill   # Antigravity
-git clone https://github.com/<you>/omniskill .claude/skills/omniskill   # Claude Code
+git clone https://github.com/uv07/omniskill ~/.claude/skills/omniskill          # Claude Code
+git clone https://github.com/uv07/omniskill ~/.gemini/config/skills/omniskill   # Antigravity
+# older Antigravity versions: ~/.gemini/antigravity/skills/omniskill
 ```
 
-Restart the app. The skill triggers automatically for software tasks, or you can call it with `/omniskill` (Claude Code) or "Use the omniskill skill to …".
+Restart the app. The skill triggers automatically for software tasks, or you can call it with `/omniskill` (Claude Code) or "Use the omniskill skill to ...".
+
+## Usage examples
+
+| You say | omniskill loads |
+|---|---|
+| "Let's build a CSV import feature" | `playbooks/planning.md`, then `tdd-testing.md` per task |
+| "This test fails intermittently" | `playbooks/debugging.md` (flaky-test section) |
+| "Review my PR" | `playbooks/review-quality.md` |
+| "Harden this Django view" | `playbooks/engineering-domains.md`, then `library/ecc/django-security/` |
+| "Split this into parallel agents" | `playbooks/agents-context.md` |
+
+## Repository layout
+
+```
+SKILL.md                     entry point: core rules + task router
+playbooks/                   8 merged playbooks
+library/INDEX.md             searchable index of all 415 skills
+library/<source>/<skill>/    verbatim upstream skill (SKILL_SOURCE.md + supporting files)
+library/LICENSES/            upstream MIT licenses
+install.sh                   installer / updater / uninstaller
+scripts/validate.py          structure + link checker (runs in CI)
+.github/workflows/           CI
+```
+
+## Development
+
+```bash
+python3 scripts/validate.py   # checks frontmatter, index coverage and all 800+ internal paths
+```
+
+See `CONTRIBUTING.md` for how to add or refresh a source, and `CHANGELOG.md` for releases.
 
 ## Notes
 
