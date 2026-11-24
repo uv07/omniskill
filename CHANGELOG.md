@@ -12,4 +12,5 @@
 - Claude Code plugin and marketplace manifests (`/plugin install omniskill --marketplace uv07/omniskill`).
 - `install.ps1` for Windows.
 - Issue and pull request templates.
+- README with banner, feature overview, architecture diagram, FAQ and credits.
 - `scripts/validate.py` and a GitHub Actions workflow that checks structure and links.
