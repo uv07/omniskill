@@ -1,0 +1,11 @@
+{
+  "name": "omniskill",
+  "version": "1.0.0",
+  "description": "One skill merging 415 engineering skills from superpowers, mattpocock/skills, ECC, Karpathy guidelines, ponytail and addyosmani/agent-skills: planning, TDD, debugging, review, git/shipping, agents, and 100+ languages, frameworks and domains.",
+  "author": { "name": "uv07", "url": "https://github.com/uv07" },
+  "homepage": "https://github.com/uv07/omniskill",
+  "repository": "https://github.com/uv07/omniskill",
+  "license": "MIT",
+  "keywords": ["skills", "tdd", "debugging", "code-review", "planning", "agents"],
+  "skills": ["./"]
+}

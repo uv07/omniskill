@@ -31,29 +31,58 @@ Only the layer a task needs gets loaded:
 
 ## Install
 
-**One line** (installs for every host it finds: `~/.claude` and/or `~/.gemini`)
+Anyone can install it. You need `git`; nothing else. Pick **one** method.
+
+### 1. Claude Code plugin (recommended for Claude Code)
+
+Inside Claude Code:
+```
+/plugin install omniskill --marketplace uv07/omniskill
+```
+On older Claude Code versions, use two steps:
+```
+/plugin marketplace add uv07/omniskill
+/plugin install omniskill@omniskill
+```
+Update later with `/plugin marketplace update omniskill`.
+
+### 2. One-line installer (Claude Code and/or Antigravity)
+
+macOS / Linux / WSL. Installs for every host it finds (`~/.claude`, `~/.gemini`):
 ```bash
 curl -fsSL https://raw.githubusercontent.com/uv07/omniskill/main/install.sh | bash
 ```
+Windows PowerShell:
+```powershell
+irm https://raw.githubusercontent.com/uv07/omniskill/main/install.ps1 | iex
+```
 
-**Pick a target**
+Choose a target yourself:
 ```bash
 git clone https://github.com/uv07/omniskill && cd omniskill
 ./install.sh --claude                 # ~/.claude/skills/omniskill
 ./install.sh --antigravity            # ~/.gemini/config/skills/omniskill
-./install.sh --project ~/code/myapp   # myapp/.claude/skills and myapp/.agents/skills
+./install.sh --project ~/code/myapp   # myapp/.claude/skills and myapp/.agents/skills (commit it so your team gets it)
 ./install.sh --update                 # git pull every install
 ./install.sh --uninstall              # remove (only touches omniskill installs)
 ```
+PowerShell takes the same options as `-Claude`, `-Antigravity`, `-Project DIR`, `-Update` and `-Uninstall`.
 
-**Manual**
+### 3. Manual clone
+
 ```bash
 git clone https://github.com/uv07/omniskill ~/.claude/skills/omniskill          # Claude Code
 git clone https://github.com/uv07/omniskill ~/.gemini/config/skills/omniskill   # Antigravity
 # older Antigravity versions: ~/.gemini/antigravity/skills/omniskill
 ```
 
-Restart the app. The skill triggers automatically for software tasks, or you can call it with `/omniskill` (Claude Code) or "Use the omniskill skill to ...".
+### Other agents
+
+The skill is plain Markdown with standard `SKILL.md` frontmatter. Any agent that loads skill folders can use it from its skills directory. Agents without skill support can still use it: add a line such as "Before any coding task, read `<path>/omniskill/SKILL.md` and follow its router" to `AGENTS.md`, `GEMINI.md` or your rules file.
+
+### Check it works
+
+Restart the app, then ask: *"Which omniskill playbook applies to a flaky test?"* It should answer with `playbooks/debugging.md`. You can also call it directly with `/omniskill` (Claude Code) or "Use the omniskill skill to ...".
 
 ## Usage examples
 
@@ -73,7 +102,8 @@ playbooks/                   8 merged playbooks
 library/INDEX.md             searchable index of all 415 skills
 library/<source>/<skill>/    verbatim upstream skill (SKILL_SOURCE.md + supporting files)
 library/LICENSES/            upstream MIT licenses
-install.sh                   installer / updater / uninstaller
+install.sh, install.ps1      installer / updater / uninstaller (Unix, Windows)
+.claude-plugin/              Claude Code plugin + marketplace manifests
 scripts/validate.py          structure + link checker (runs in CI)
 .github/workflows/           CI
 ```
@@ -84,7 +114,7 @@ scripts/validate.py          structure + link checker (runs in CI)
 python3 scripts/validate.py   # checks frontmatter, index coverage and all 800+ internal paths
 ```
 
-See `CONTRIBUTING.md` for how to add or refresh a source, and `CHANGELOG.md` for releases.
+Issues and pull requests are welcome: bug reports, broken routes, and new MIT-licensed skill sources. See `CONTRIBUTING.md` for how to add or refresh a source, and `CHANGELOG.md` for releases.
 
 ## Notes
 

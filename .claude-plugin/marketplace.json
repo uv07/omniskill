@@ -1,0 +1,14 @@
+{
+  "name": "omniskill",
+  "owner": { "name": "uv07", "url": "https://github.com/uv07" },
+  "metadata": { "description": "The omniskill engineering super-skill for Claude Code." },
+  "plugins": [
+    {
+      "name": "omniskill",
+      "source": "./",
+      "description": "One skill merging 415 engineering skills from six open-source collections.",
+      "version": "1.0.0",
+      "category": "development"
+    }
+  ]
+}

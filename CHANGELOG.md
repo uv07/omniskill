@@ -9,4 +9,7 @@
 - Eight merged playbooks (`playbooks/`).
 - Verbatim library with `library/INDEX.md` and upstream licenses.
 - `install.sh` (install, update, uninstall; Claude Code, Antigravity, per project).
+- Claude Code plugin and marketplace manifests (`/plugin install omniskill --marketplace uv07/omniskill`).
+- `install.ps1` for Windows.
+- Issue and pull request templates.
 - `scripts/validate.py` and a GitHub Actions workflow that checks structure and links.

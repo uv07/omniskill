@@ -12,6 +12,8 @@ jobs:
           python-version: "3.12"
       - name: Validate skill structure and links
         run: python3 scripts/validate.py
+      - name: Check plugin manifests are valid JSON
+        run: python3 -m json.tool .claude-plugin/plugin.json >/dev/null && python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
       - name: Lint installer
         run: shellcheck install.sh
       - name: Installer smoke test
